@@ -50,7 +50,7 @@ module.exports = {
   rules: {
     // 3. 注意要加上这一句，开启 prettier 自动修复的功能
     'prettier/prettier': 'error',
-    indent: ['error', 'tab'],
+    indent: ['warn', 2], // 换成了2个空格
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
