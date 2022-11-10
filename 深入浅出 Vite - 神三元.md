@@ -33,6 +33,44 @@
 
 ### 4、 样式方案：在 `Vite` 中接入现代化的 `CSS` 工程化方案
 
+#### QA
+ - Tailwind CSS IntelliSense 没有提示的话
+   -  settings-json设置
+  ```json
+"tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "css": "css"
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass"],
+  "editor.quickSuggestions": { "strings": true }
+```
+```ts
+import { AttributifyAttributes } from 'windicss/types/jsx'
+
+declare module 'react' {
+
+ interface HTMLAttributes<T> extends AttributifyAttributes {}
+
+}
+
+#改一下shim.d.ts的配置。三元写的这种不生效了
+```
+
+- tailwind和postcss的配置文件，在Vite3.X版本要把后缀名改为.cjs, 不然会报模块错误。
+
+- [我找到了如何配置自动注入less的配置了
+  github.com](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fless-loader%23additionaldata)
+  除此之外
+  [如果要配置umi中的文件自动注入可以参考
+  github.com](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fumijs%2Fumi%2Fissues%2F4131)
+  
+- 在src下面新建types/shim.d.ts
+
+- [autoprefixer 可以参考这篇文章juejin.cn](https://juejin.cn/post/6901943749916491783)
+
+- 补充, styled component中需要更好的debug可以参考[github.com](https://github.com/styled-components/babel-plugin-styled-components/issues/350) 这样可以显示一些有意义的className前缀
+
 ### 5、 代码规范: 如何利用 `Lint` 工具链来保证代码风格和质量？
 
 ### 6、 静态资源: 如何在 `Vite` 中处理各种静态资源？
