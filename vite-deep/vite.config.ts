@@ -4,7 +4,6 @@ import { defineConfig, normalizePath } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import autoprefixer from 'autoprefixer';
-import windi from 'vite-plugin-windicss';
 
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
@@ -32,7 +31,6 @@ export default defineConfig({
       // 通过 `@emotion/react` 包编译 emotion 中的特殊 jsx 语法
       jsxImportSource: '@emotion/react',
     }),
-    windi()
   ],
   css: {
     modules: {
