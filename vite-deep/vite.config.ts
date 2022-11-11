@@ -5,6 +5,7 @@ import path from 'path';
 import react from '@vitejs/plugin-react';
 import autoprefixer from 'autoprefixer';
 import viteEslint from 'vite-plugin-eslint';
+import viteStylelint from '@amatlash/vite-plugin-stylelint';
 
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
@@ -32,7 +33,11 @@ export default defineConfig({
       // 通过 `@emotion/react` 包编译 emotion 中的特殊 jsx 语法
       jsxImportSource: '@emotion/react'
     }),
-    viteEslint()
+    viteEslint(),
+    viteStylelint.default({
+      // 对某些文件排除检查
+      exclude: /windicss|node_modules/
+    })
   ],
   css: {
     modules: {
