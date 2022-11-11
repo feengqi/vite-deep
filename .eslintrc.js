@@ -18,10 +18,13 @@ module.exports = {
     'eslint:recommended',
     // 第3种情况，可以省略包名中的 `eslint-plugin`
     // 格式一般为: `plugin:${pluginName}/${configName}`
+    // React18 Warning: React version not specified in eslint-plugin-react settings.
+    // 把extends中的 plugin:react配置换成这个 plugin:react/jsx-runtime
     'plugin:react/recommended',
     // 1. 接入 prettier 的规则
     'prettier',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended'
   ],
   overrides: [],
   // parser - 解析器
@@ -33,6 +36,9 @@ module.exports = {
   // sourceType: 默认为script，如果使用 ES Module 则应设置为module
   // ecmaFeatures: 为一个对象，表示想使用的额外语言特性，如开启 jsx。
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
