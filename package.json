@@ -11,7 +11,8 @@
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./",
     "lint:style": "stylelint --fix \"src/**/*.{css,scss}\"",
-    "lint": "npm run lint:script && npm run lint:style"
+    "lint": "npm run lint:script && npm run lint:style",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -33,6 +34,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
     "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "sass": "^1.56.1",
@@ -48,5 +50,15 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-windicss": "^1.8.8",
     "windicss": "^3.5.6"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts}": [
+      "npm run lint:script",
+      "git add ."
+    ],
+    "**/*.{scss}": [
+      "npm run lint:style",
+      "git add ."
+    ]
   }
 }
