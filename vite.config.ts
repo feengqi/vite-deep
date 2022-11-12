@@ -8,6 +8,9 @@ import viteEslint from 'vite-plugin-eslint';
 import viteStylelint from '@amatlash/vite-plugin-stylelint';
 import svgr from 'vite-plugin-svgr';
 
+import wasm from 'vite-plugin-wasm';
+import topLevelAwait from 'vite-plugin-top-level-await';
+
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
 const variablePath = normalizePath(path.resolve('./src/variable.scss'));
@@ -40,7 +43,11 @@ export default defineConfig({
       exclude: /windicss|node_modules/
     }),
     // SVG 组件方式加载
-    svgr()
+    svgr(),
+    // Add WebAssembly ESM integration (aka. Webpack's asyncWebAssembly) to Vite and support wasm-pack generated modules.
+    // You also need the vite-plugin-top-level-await plugin unless you target very modern browsers only (i.e. set build.target to esnext).
+    wasm(),
+    topLevelAwait()
   ],
   css: {
     modules: {
