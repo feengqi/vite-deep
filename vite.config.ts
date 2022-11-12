@@ -75,8 +75,11 @@ export default defineConfig({
     alias: {
       '@assets': path.join(__dirname, 'src/assets')
     }
-  }
+  },
   // json: {
   //   stringify: true
   // }
+  // 指定额外的 picomatch 模式 作为静态资源处理
+  // https://cn.vitejs.dev/config/shared-options.html#assetsinclude
+  assetsInclude: ['**/*.gltf']
 });
