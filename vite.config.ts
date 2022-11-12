@@ -68,5 +68,8 @@ export default defineConfig({
     alias: {
       '@assets': path.join(__dirname, 'src/assets')
     }
+  },
+  json: {
+    stringify: true
   }
 });
