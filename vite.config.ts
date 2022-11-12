@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react';
 import autoprefixer from 'autoprefixer';
 import viteEslint from 'vite-plugin-eslint';
 import viteStylelint from '@amatlash/vite-plugin-stylelint';
+import svgr from 'vite-plugin-svgr';
 
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
@@ -34,10 +35,12 @@ export default defineConfig({
       jsxImportSource: '@emotion/react'
     }),
     viteEslint(),
-    viteStylelint.default({
+    viteStylelint({
       // 对某些文件排除检查
       exclude: /windicss|node_modules/
-    })
+    }),
+    // SVG 组件方式加载
+    svgr()
   ],
   css: {
     modules: {
@@ -58,6 +61,12 @@ export default defineConfig({
           overrideBrowserslist: ['Chrome > 40', 'ff > 31', 'ie 11']
         })
       ]
+    }
+  },
+  resolve: {
+    // 别名配置
+    alias: {
+      '@assets': path.join(__dirname, 'src/assets')
     }
   }
 });
