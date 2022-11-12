@@ -19,9 +19,9 @@ worker.addEventListener('message', (e) => {
   console.log(e);
 });
 
-init({}).then((exports) => {
+init({}).then(({ exports }) => {
   console.log('exports', exports);
-  const fibFunc = exports.exports.fib as FibFunc;
+  const fibFunc = exports.fib as FibFunc;
   console.log('fibFunc', fibFunc);
   console.log('Fib result:', fibFunc(10));
 });
