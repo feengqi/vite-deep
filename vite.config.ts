@@ -10,6 +10,7 @@ import svgr from 'vite-plugin-svgr';
 
 import wasm from 'vite-plugin-wasm';
 import topLevelAwait from 'vite-plugin-top-level-await';
+import viteImagemin from 'vite-plugin-imagemin';
 
 // 是否为生产环境，在生产环境一般会注入 NODE_ENV 这个环境变量，见下面的环境变量文件配置
 const isProduction = process.env.NODE_ENV === 'production';
@@ -50,7 +51,29 @@ export default defineConfig({
     // Add WebAssembly ESM integration (aka. Webpack's asyncWebAssembly) to Vite and support wasm-pack generated modules.
     // You also need the vite-plugin-top-level-await plugin unless you target very modern browsers only (i.e. set build.target to esnext).
     wasm(),
-    topLevelAwait()
+    topLevelAwait(),
+    viteImagemin({
+      // 无损压缩配置，无损压缩下图片质量不会变差
+      optipng: {
+        optimizationLevel: 7
+      },
+      // 有损压缩配置，有损压缩下图片质量可能会变差
+      pngquant: {
+        quality: [0.8, 0.9]
+      },
+      // svg 优化
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox'
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: false
+          }
+        ]
+      }
+    })
   ],
   css: {
     modules: {
