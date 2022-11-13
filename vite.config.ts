@@ -85,5 +85,14 @@ export default defineConfig({
   // 指定额外的 picomatch 模式 作为静态资源处理
   // https://cn.vitejs.dev/config/shared-options.html#assetsinclude
   assetsInclude: ['**/*.gltf'],
-  base: isProduction ? CDN_URL : '/'
+  base: isProduction ? CDN_URL : '/',
+  build: {
+    // Vite 中内置的优化方案是下面这样的:
+    // 如果静态资源体积 >= 4KB，则提取成单独的文件
+    // 如果静态资源体积 < 4KB，则作为 base64 格式的字符串内联
+    // 这个临界值你可以通过build.assetsInlineLimit自行配置
+    // svg 格式的文件不受这个临时值的影响，始终会打包成单独的文件，因为它和普通格式的图片不一样，需要动态设置一些属性
+    // 8 KB
+    assetsInlineLimit: 8 * 1024
+  }
 });
