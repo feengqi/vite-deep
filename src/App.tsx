@@ -8,6 +8,9 @@ function App() {
     <div>
       <Header />
       <img src={logo} className="w-20" alt="logo" />
+      <img
+        src={new URL('./logo.png', import.meta.env.VITE_IMG_BASE_URL).href}
+      />
       <p className="bg-red-400">Hello Vite + React!</p>
     </div>
   );

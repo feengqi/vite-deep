@@ -11,6 +11,9 @@ import svgr from 'vite-plugin-svgr';
 import wasm from 'vite-plugin-wasm';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
+// 是否为生产环境，在生产环境一般会注入 NODE_ENV 这个环境变量，见下面的环境变量文件配置
+const isProduction = process.env.NODE_ENV === 'production';
+const CDN_URL = '/';
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
 const variablePath = normalizePath(path.resolve('./src/variable.scss'));
@@ -81,5 +84,6 @@ export default defineConfig({
   // }
   // 指定额外的 picomatch 模式 作为静态资源处理
   // https://cn.vitejs.dev/config/shared-options.html#assetsinclude
-  assetsInclude: ['**/*.gltf']
+  assetsInclude: ['**/*.gltf'],
+  base: isProduction ? CDN_URL : '/'
 });
